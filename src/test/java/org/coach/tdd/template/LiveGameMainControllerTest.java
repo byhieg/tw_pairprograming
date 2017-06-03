@@ -8,7 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 
-public class LiveGameControllerTest {
+public class LiveGameMainControllerTest {
 
 
     private LiveGameController liveGameController;

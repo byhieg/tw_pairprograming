@@ -3,21 +3,18 @@ package org.coach.tdd.template;
 import java.util.Random;
 import java.util.Scanner;
 
-public class LiveGame implements IGame {
+public class LiveGameMain implements IGame {
 
     private LiveGameController controller;
     private Tools tool;
     private int gameLengthSize;
-
-
     private int gameWidthSize;
-
 
     private int[][] gameMap;
     private int[][] tmpGame;
 
 
-    public LiveGame() {
+    public LiveGameMain() {
         controller = new LiveGameController();
         tool = new Tools();
     }
@@ -102,7 +99,7 @@ public class LiveGame implements IGame {
 
 
     public static void main(String[] args) {
-        new LiveGame().initGame();
+        new LiveGameMain().initGame();
     }
 
 
