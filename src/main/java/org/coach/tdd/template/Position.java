@@ -1,15 +1,16 @@
 package org.coach.tdd.template;
 
-public class Cell {
+public class Position {
     public static final int INIT = -1;
 
     private int x = INIT;
     private int y = INIT;
     private boolean isExisted = false;
 
-    public Cell() {
+    public Position() {
 
     }
+
     public boolean isExisted() {
         return isExisted;
     }

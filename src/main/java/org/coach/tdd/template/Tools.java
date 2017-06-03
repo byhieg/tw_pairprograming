@@ -1,5 +1,7 @@
 package org.coach.tdd.template;
 
+import static org.coach.tdd.template.LiveGameController.LIVE;
+
 /**
  * Created by byhieg on 17/6/3.
  * Mail to byhieg@gmail.com
@@ -12,7 +14,11 @@ public class Tools {
         int length = arrays.length;
         for (int i = 0; i < length; i++) {
             for (int j = 0; j < length; j++) {
-                System.out.print(arrays[i][j] + " ");
+                if (arrays[i][j] == LIVE) {
+                    System.out.print("* ");
+                } else {
+                    System.out.print(". ");
+                }
             }
             System.out.println();
         }
@@ -27,8 +33,16 @@ public class Tools {
     }
 
     public void doPause() throws InterruptedException {
-            Thread.sleep(getPauseTime());
+        Thread.sleep(getPauseTime());
 
+    }
+
+    public void cloneArrays(int[][] src, int[][] des) {
+        for (int i = 0; i < src.length; i++) {
+            for (int j = 0; j < src[i].length; j++) {
+                des[i][j] = src[i][j];
+            }
+        }
     }
 
 }
