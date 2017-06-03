@@ -6,30 +6,10 @@ public class Cell {
     private int x = INIT;
     private int y = INIT;
     private boolean isExisted = false;
-    private boolean isLived = false;
 
     public Cell() {
 
     }
-
-    public Cell(int x, int y) {
-        this.x = x;
-        this.y = y;
-    }
-
-
-    public boolean isLived() {
-        return isLived;
-    }
-
-    public void setLived(boolean lived) {
-        isLived = lived;
-    }
-
-
-
-
-
     public boolean isExisted() {
         return isExisted;
     }

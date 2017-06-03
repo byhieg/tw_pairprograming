@@ -1,15 +1,16 @@
 package org.coach.tdd.template;
 
-
 import java.util.Random;
-
 public class LiveGame {
     public static final int LIVE = 1;
     public static final int DEAD = 0;
     public static final int NO_CHANGE = 2;
-    private static final int GAME_SIZE = 10;
+    public static final int LIVE_LIMIT = 3;
+    public static final int NO_CHANGE_LIMIT = 2;
+    private static final int GAME_SIZE = 3;
     private int[][] gameMap = new int[GAME_SIZE][GAME_SIZE];
     private int[][] tmpGame = new int[GAME_SIZE][GAME_SIZE];
+    private Tools tools = new Tools();
 
     public void createGameMap() {
         Random random = new Random();
@@ -22,6 +23,12 @@ public class LiveGame {
             }
             System.out.println();
         }
+        gameMap = new int[][]{
+                {0, 0, 1},
+                {0, 1, 1},
+                {0, 1, 1}
+        };
+
         tmpGame = gameMap;
     }
 
@@ -31,84 +38,91 @@ public class LiveGame {
 
     public Cell getLeftUpPosition(int x, int y) {
         Cell cell = new Cell();
-        if (!isCrossBroader(x - 1, y - 1)) {
-            cell.setExisted(true);
-            cell.setX(x - 1);
-            cell.setY(y - 1);
+        if (isCrossBroader(x - 1, y - 1)) {
+            return cell;
         }
+        cell.setExisted(true);
+        cell.setX(x - 1);
+        cell.setY(y - 1);
         return cell;
     }
 
     public Cell getUpPosition(int x, int y) {
         Cell cell = new Cell();
-        if (!isCrossBroader(x, y - 1)) {
-            cell.setExisted(true);
-            cell.setX(x);
-            cell.setY(y - 1);
+        if (isCrossBroader(x, y - 1)) {
+            return cell;
         }
+        cell.setExisted(true);
+        cell.setX(x);
+        cell.setY(y - 1);
         return cell;
     }
 
     public Cell getRightUpPosition(int x, int y) {
         Cell cell = new Cell();
-        if (!isCrossBroader(x + 1, y - 1)) {
-            cell.setExisted(true);
-            cell.setX(x + 1);
-            cell.setY(y - 1);
+        if (isCrossBroader(x + 1, y - 1)) {
+            return cell;
         }
+        cell.setExisted(true);
+        cell.setX(x + 1);
+        cell.setY(y - 1);
         return cell;
     }
 
     public Cell getRightPosition(int x, int y) {
         Cell cell = new Cell();
-        if (!isCrossBroader(x + 1, y)) {
-            cell.setExisted(true);
-            cell.setX(x + 1);
-            cell.setY(y);
+        if (isCrossBroader(x + 1, y)) {
+            return cell;
         }
+        cell.setExisted(true);
+        cell.setX(x + 1);
+        cell.setY(y);
         return cell;
     }
 
     public Cell getRightDownPosition(int x, int y) {
         Cell cell = new Cell();
-        if (!isCrossBroader(x + 1, y + 1)) {
-            cell.setExisted(true);
-            cell.setX(x + 1);
-            cell.setY(y + 1);
+        if (isCrossBroader(x + 1, y + 1)) {
+            return cell;
         }
+        cell.setExisted(true);
+        cell.setX(x + 1);
+        cell.setY(y + 1);
         return cell;
     }
 
     public Cell getDownPosition(int x, int y) {
         Cell cell = new Cell();
-        if (!isCrossBroader(x, y + 1)) {
-            cell.setExisted(true);
-            cell.setX(x);
-            cell.setY(y + 1);
+        if (isCrossBroader(x, y + 1)) {
+            return cell;
         }
+        cell.setExisted(true);
+        cell.setX(x);
+        cell.setY(y + 1);
         return cell;
     }
 
     public Cell getLeftDownPosition(int x, int y) {
         Cell cell = new Cell();
-        if (!isCrossBroader(x - 1, y + 1)) {
-            cell.setExisted(true);
-            cell.setX(x - 1);
-            cell.setY(y + 1);
+        if (isCrossBroader(x - 1, y + 1)) {
+            return cell;
         }
+        cell.setExisted(true);
+        cell.setX(x - 1);
+        cell.setY(y + 1);
         return cell;
     }
 
     public Cell getLeftPosition(int x, int y) {
         Cell cell = new Cell();
-        if (!isCrossBroader(x - 1, y)) {
-            cell.setExisted(true);
-            cell.setX(x - 1);
-            cell.setY(y);
+        if (isCrossBroader(x - 1, y)) {
+            return cell;
         }
+        cell.setExisted(true);
+        cell.setX(x - 1);
+        cell.setY(y);
         return cell;
     }
-
 
     public boolean isCrossBroader(int x, int y) {
         if (x < 0 || x >= GAME_SIZE || y < 0 || y >= GAME_SIZE) {
@@ -117,9 +131,15 @@ public class LiveGame {
         return false;
     }
 
-    public int doEvolution(int x, int y) {
+    public void doEvolution(int x, int y) {
         int liveCount = getLiveCount(x, y);
-        return liveCount;
+        if (liveCount == LIVE_LIMIT) {
+            tmpGame[x][y] = LIVE;
+        } else if (liveCount == NO_CHANGE_LIMIT) {
+            tmpGame[x][y] = tmpGame[x][y];
+        } else {
+            tmpGame[x][y] = DEAD;
+        }
     }
 
     public int getLiveCount(int x, int y) {
@@ -141,25 +161,10 @@ public class LiveGame {
         return liveCount;
     }
 
-    public void saveStatus(int x, int y) {
-        switch (doEvolution(x, y)) {
-            case LIVE:
-                tmpGame[x][y] = LIVE;
-                break;
-            case DEAD:
-                tmpGame[x][y] = DEAD;
-                break;
-            case NO_CHANGE:
-                break;
-            default:
-                break;
-        }
-    }
-
     public void doMacroEvolution() {
         for (int i = 0; i < GAME_SIZE; i++) {
             for (int j = 0; j < GAME_SIZE; j++) {
-                saveStatus(i, j);
+                doEvolution(i, j);
             }
         }
     }
@@ -168,20 +173,24 @@ public class LiveGame {
         gameMap = tmpGame;
     }
 
-    public void startGame() {
+    public void startGame() throws InterruptedException {
         int times = 1;
         createGameMap();
-        while (true) {
-            doMacroEvolution();
-            finishEvolution();
-            System.out.println("第 " + times + " 次");
-            Tools.printArrays(gameMap);
-            Tools.doPause();
-            times++;
-        }
+//        while (true) {
+        doMacroEvolution();
+        finishEvolution();
+        System.out.println("第 " + times + " 次");
+        tools.printArrays(gameMap);
+        tools.doPause();
+        times++;
+//        }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         new LiveGame().startGame();
+    }
+
+    public int[][] getTmpGame() {
+        return tmpGame;
     }
 }

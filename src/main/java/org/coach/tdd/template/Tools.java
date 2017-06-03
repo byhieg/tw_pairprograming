@@ -6,9 +6,9 @@ package org.coach.tdd.template;
  */
 public class Tools {
 
-    private static int time = 1000 * 10;
+    private static int time = 1000;
 
-    public static void printArrays(int[][] arrays) {
+    public void printArrays(int[][] arrays) {
         int length = arrays.length;
         for (int i = 0; i < length; i++) {
             for (int j = 0; j < length; j++) {
@@ -18,20 +18,17 @@ public class Tools {
         }
     }
 
-    public static int getPauseTime() {
+    public int getPauseTime() {
         return time;
     }
 
-    public static void setPauseTime(int expectTime) {
+    public void setPauseTime(int expectTime) {
         time = expectTime;
     }
 
-    public static void doPause() {
-        try {
+    public void doPause() throws InterruptedException {
             Thread.sleep(getPauseTime());
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+
     }
 
 }
