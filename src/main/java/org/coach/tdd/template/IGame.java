@@ -12,5 +12,5 @@ public interface IGame {
 
     void createGameMap();
 
-    void inputGameMaps();
+    void inputGameMaps(int from);
 }

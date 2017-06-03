@@ -1,5 +1,7 @@
 package org.coach.tdd.template;
 
+import javax.swing.text.Keymap;
+import java.io.*;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -22,14 +24,14 @@ public class LiveGameMain implements IGame {
     public void initGame() {
         Scanner sc = new Scanner(System.in);
         System.out.println("开始游戏");
+        System.out.println("选择随机化或者指定初始状态，0表示随机化，1表示从终端输入");
+        int choose = sc.nextInt();
         System.out.println("输入棋盘长度");
         setGameLengthSize(sc.nextInt());
         System.out.println("输入棋盘宽度");
         setGameWidthSize(sc.nextInt());
         System.out.println("输入进化周期");
         tool.setPauseTime(sc.nextInt());
-        System.out.println("选择随机化或者指定初始状态，0表示随机化，1表示指定");
-        int choose = sc.nextInt();
         startGameWithRequest(choose);
     }
 
@@ -40,7 +42,7 @@ public class LiveGameMain implements IGame {
                 break;
             case 1:
                 System.out.println("输入0，表示死亡，输入1表示存活");
-                inputGameMaps();
+                inputGameMaps(1);
                 break;
             default:
                 System.out.println("输入错误");
@@ -82,8 +84,17 @@ public class LiveGameMain implements IGame {
     }
 
     @Override
-    public void inputGameMaps() {
+    public void inputGameMaps(int from) {
         gameMap = new int[gameWidthSize][gameLengthSize];
+        switch (from) {
+            case 1:
+                consleInput();
+                break;
+        }
+    }
+
+
+    private void consleInput() {
         Scanner scanner = new Scanner(System.in);
         for (int i = 0; i < gameWidthSize; i++) {
             for (int j = 0; j < gameLengthSize; j++) {
