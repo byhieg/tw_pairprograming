@@ -2,7 +2,7 @@
 
 ## 结对编程成果展示
 
-![image](http://ww1.sinaimg.cn/large/006rMFVegy1fg84d6y0rvj30jp11sdjr.jpg)
+![image](http://ww1.sinaimg.cn/large/006rMFVegy1fg8cc4f9c9j30mm17f78s.jpg)
 
 
 ## TDD Practice

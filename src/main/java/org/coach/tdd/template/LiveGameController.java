@@ -113,7 +113,7 @@ public class LiveGameController {
         if (liveCount == LIVE_LIMIT) {
             tmpMaps[x][y] = LIVE;
         } else if (liveCount == NO_CHANGE_LIMIT) {
-            tmpMaps[x][y] = maps[x][y];
+            tmpMaps[x][y] = tmpMaps[x][y];
         } else {
             tmpMaps[x][y] = DEAD;
         }
