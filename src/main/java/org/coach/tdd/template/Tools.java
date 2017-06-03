@@ -15,9 +15,9 @@ public class Tools {
         for (int i = 0; i < length; i++) {
             for (int j = 0; j < length; j++) {
                 if (arrays[i][j] == LIVE) {
-                    System.out.print("* ");
+                    System.out.print("■ ");
                 } else {
-                    System.out.print(". ");
+                    System.out.print("□ ");
                 }
             }
             System.out.println();
@@ -43,6 +43,16 @@ public class Tools {
                 des[i][j] = src[i][j];
             }
         }
+    }
+
+    public int[][] cloneArrays(int[][] src) {
+        int[][] des = new int[src.length][src[0].length];
+        for (int i = 0; i < src.length; i++) {
+            for (int j = 0; j < src[i].length; j++) {
+                des[i][j] = src[i][j];
+            }
+        }
+        return des;
     }
 
 }

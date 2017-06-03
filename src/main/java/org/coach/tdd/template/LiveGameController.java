@@ -3,10 +3,9 @@ package org.coach.tdd.template;
 public class LiveGameController {
     public static final int LIVE = 1;
     public static final int DEAD = 0;
-    public static final int NO_CHANGE = 2;
     public static final int LIVE_LIMIT = 3;
     public static final int NO_CHANGE_LIMIT = 2;
-
+    private int[][] tmpMaps;
 
     public boolean judgeCellLived(int x, int y, int[][] maps) {
         return maps[x][y] == LIVE;
@@ -112,11 +111,11 @@ public class LiveGameController {
     public void doEvolution(int x, int y, int[][] maps) {
         int liveCount = getLiveCount(x, y, maps);
         if (liveCount == LIVE_LIMIT) {
-            maps[x][y] = LIVE;
+            tmpMaps[x][y] = LIVE;
         } else if (liveCount == NO_CHANGE_LIMIT) {
-            maps[x][y] = maps[x][y];
+            tmpMaps[x][y] = maps[x][y];
         } else {
-            maps[x][y] = DEAD;
+            tmpMaps[x][y] = DEAD;
         }
     }
 
@@ -139,12 +138,14 @@ public class LiveGameController {
         return liveCount;
     }
 
-    public void doMacroEvolution(int[][] maps) {
+    public int[][] doMacroEvolution(int[][] maps) {
+        tmpMaps = new Tools().cloneArrays(maps);
         for (int i = 0; i < maps.length; i++) {
             for (int j = 0; j < maps[i].length; j++) {
                 doEvolution(i, j, maps);
             }
         }
+        return tmpMaps;
     }
 
 }

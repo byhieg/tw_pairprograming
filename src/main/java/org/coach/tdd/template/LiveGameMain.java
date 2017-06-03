@@ -11,7 +11,6 @@ public class LiveGameMain implements IGame {
     private int gameWidthSize;
 
     private int[][] gameMap;
-    private int[][] tmpGame;
 
 
     public LiveGameMain() {
@@ -54,9 +53,11 @@ public class LiveGameMain implements IGame {
     @Override
     public void startGame() {
         int times = 1;
+        System.out.println("第 0 次");
+        tool.printArrays(gameMap);
         while (true) {
-            controller.doMacroEvolution(tmpGame);
-            tool.cloneArrays(tmpGame, gameMap);
+            int[][] result = controller.doMacroEvolution(gameMap);
+            tool.cloneArrays(result, gameMap);
             System.out.println("第 " + times + " 次");
             tool.printArrays(gameMap);
             try {
@@ -71,14 +72,11 @@ public class LiveGameMain implements IGame {
     @Override
     public void createGameMap() {
         Random random = new Random();
-        System.out.println("随机化初始状态");
         gameMap = new int[gameWidthSize][gameLengthSize];
-        tmpGame = new int[gameWidthSize][gameLengthSize];
         for (int i = 0; i < gameWidthSize; i++) {
             for (int j = 0; j < gameLengthSize; j++) {
                 int status = random.nextInt(2);
                 gameMap[i][j] = status;
-                tmpGame[i][j] = status;
             }
         }
     }
@@ -86,13 +84,11 @@ public class LiveGameMain implements IGame {
     @Override
     public void inputGameMaps() {
         gameMap = new int[gameWidthSize][gameLengthSize];
-        tmpGame = new int[gameWidthSize][gameLengthSize];
         Scanner scanner = new Scanner(System.in);
         for (int i = 0; i < gameWidthSize; i++) {
             for (int j = 0; j < gameLengthSize; j++) {
                 int status = scanner.nextInt();
                 gameMap[i][j] = status;
-                tmpGame[i][j] = status;
             }
         }
     }
