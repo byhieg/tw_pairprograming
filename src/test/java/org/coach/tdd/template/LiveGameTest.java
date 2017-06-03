@@ -27,7 +27,7 @@ public class LiveGameTest {
 
     @Test
     public void shouldJudgeCellStatusReturnLive() throws Exception {
-        assertThat(liveGame.judgeCellStatus(0, 0), is(true));
+        assertThat(liveGame.judgeCellStatus(0, 0), is(false));
     }
 
     @Test
@@ -95,13 +95,20 @@ public class LiveGameTest {
     }
 
     @Test
+    public void shouldIsExistedReturnFalse() throws Exception {
+        assertThat(liveGame.getLeftUpPosition(0, 0).isExisted(), is(false));
+        assertThat(liveGame.getLeftPosition(0, 0).isExisted(), is(false));
+    }
+
+    @Test
     public void shouldIsCrossBroaderReturnTrue() throws Exception {
         assertThat(liveGame.isCrossBroader(-1, -1), is(true));
         assertThat(liveGame.isCrossBroader(10, 10), is(true));
         assertThat(liveGame.isCrossBroader(0, 10), is(true));
         assertThat(liveGame.isCrossBroader(8, 10), is(true));
         assertThat(liveGame.isCrossBroader(10, 3), is(true));
-
     }
+
+
 
 }
