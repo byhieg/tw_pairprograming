@@ -119,6 +119,9 @@ public class LiveGameController {
         }
     }
 
+
+
+
     public int getLiveCount(int x, int y, int[][] maps) {
         Position[] positions = new Position[8];
         int liveCount = 0;

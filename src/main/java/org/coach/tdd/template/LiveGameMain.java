@@ -1,7 +1,5 @@
 package org.coach.tdd.template;
 
-import javax.swing.text.Keymap;
-import java.io.*;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -90,18 +88,34 @@ public class LiveGameMain implements IGame {
             case 1:
                 consleInput();
                 break;
+
+            default:
+                break;
         }
     }
 
 
     private void consleInput() {
         Scanner scanner = new Scanner(System.in);
-        for (int i = 0; i < gameWidthSize; i++) {
-            for (int j = 0; j < gameLengthSize; j++) {
-                int status = scanner.nextInt();
-                gameMap[i][j] = status;
-            }
-        }
+        gameMap = new int[][]{
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,1,1,1,1,1,1,0,0},
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0},
+
+        };
+//        for (int i = 0; i < gameWidthSize; i++) {
+//            for (int j = 0; j < gameLengthSize; j++) {
+//                int status = scanner.nextInt();
+//                gameMap[i][j] = status;
+//            }
+//        }
     }
 
 
